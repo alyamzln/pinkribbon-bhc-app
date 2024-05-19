@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "164700029901",
+    "project_id": "pinkribbonbhc-55787",
+    "storage_bucket": "pinkribbonbhc-55787.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164700029901:android:310b8ee3874c87ec3b7a84",
+        "android_client_info": {
+          "package_name": "com.example.pinkribbonbhc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164700029901-ubbo7ad83rd87kt65rfiommdh3utnb4p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pinkribbonbhc",
+            "certificate_hash": "880c27d43323e40e6a84c8c2761cc8e61393bf64"
+          }
+        },
+        {
+          "client_id": "164700029901-1d1se3n9q0s672o2t4pd8btic57nhcqr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCRAg55prSyBl0eXihhWTVyQAX2ilQSeU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164700029901-1d1se3n9q0s672o2t4pd8btic57nhcqr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "164700029901-hg6ietdnc7jl71h3o5u0sioqa1gc4siq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pinkribbonbhc"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
