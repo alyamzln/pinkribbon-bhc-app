@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:pinkribbonbhc/local_notification/notification_helper.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
+import 'package:pinkribbonbhc/utils/popups/loaders.dart';
 
 class FeedbackPage3 extends StatelessWidget {
   const FeedbackPage3({super.key});
@@ -35,7 +38,7 @@ class FeedbackPage3 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 14.0),
                     ),
                     onPressed: () {
-                      // Add your onPressed code here!
+                      Get.toNamed('/locator');
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -84,7 +87,23 @@ class FeedbackPage3 extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 14.0),
                     ),
                     onPressed: () {
-                      // Add your onPressed code here!
+                      // Calculate the reminder date one month later
+                      DateTime reminderDate =
+                          DateTime.now().add(Duration(days: 30));
+
+                      // Show the reminder notification
+                      NotificationHelper.scheduleNotification(
+                        title: 'Checking in!',
+                        body: 'Does your symptom still persist?',
+                        scheduledDateTime: reminderDate,
+                      );
+
+                      // Show a success message to the user
+                      TLoaders.successSnackBar(
+                        title: 'Reminder set!',
+                        message:
+                            'You will be reminded to check your breast condition in a month.',
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),

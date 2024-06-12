@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:pinkribbonbhc/common/widgets/appbar/appbar.dart';
 import 'package:pinkribbonbhc/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:pinkribbonbhc/features/self-exam/screens/breast_self_exam/self_exam_screen.dart';
@@ -7,8 +10,42 @@ import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/image_strings.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
 
-class SelfExamStart extends StatelessWidget {
+class SelfExamStart extends StatefulWidget {
   const SelfExamStart({Key? key}) : super(key: key);
+
+  @override
+  State<SelfExamStart> createState() => _SelfExamStartState();
+}
+
+class _SelfExamStartState extends State<SelfExamStart> {
+  DateTime? _userModifiedDate;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserModifiedDate();
+  }
+
+  Future<void> _loadUserModifiedDate() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String userId = user.uid;
+      DocumentSnapshot doc = await FirebaseFirestore.instance
+          .collection('ScheduleExams')
+          .doc(userId)
+          .get();
+      if (doc.exists) {
+        Map<String, dynamic> scheduleExamData =
+            doc.data() as Map<String, dynamic>;
+        if (scheduleExamData.containsKey('userModifiedDate')) {
+          setState(() {
+            _userModifiedDate =
+                (scheduleExamData['userModifiedDate'] as Timestamp).toDate();
+          });
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +74,26 @@ class SelfExamStart extends StatelessWidget {
               padding: const EdgeInsets.all(TSizes.defaultSpace),
               child: Column(
                 children: [
+                  if (_userModifiedDate != null)
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Icon(Icons.info_outline),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                    'Your next self-check is scheduled for ${DateFormat('MMMM d, y - h:mm a').format(_userModifiedDate!)}',
+                                    style: TextStyle(fontFamily: 'Poppins')),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   SizedBox(
                     width: double.infinity,
                     height: 320,

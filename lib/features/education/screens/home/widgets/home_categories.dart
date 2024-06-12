@@ -1,11 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinkribbonbhc/common/widgets/image_text_widgets/vertical_image_text.dart';
 import 'package:pinkribbonbhc/utils/constants/image_strings.dart';
+import 'package:pinkribbonbhc/utils/popups/full_screen_loader.dart';
 
 class THomeCategories extends StatelessWidget {
   const THomeCategories({
     Key? key,
   }) : super(key: key);
+
+  void navigateToCategory(int index) {
+    switch (index) {
+      case 0:
+        Get.toNamed('/locator'); // Navigate to Locator screen
+        break;
+      case 1:
+        Get.toNamed('/records'); // Navigate to Records screen
+        break;
+      case 2:
+        Get.toNamed('/risk'); // Navigate to Risk screen
+        break;
+      case 3:
+        Get.toNamed('/trends'); // Navigate to Trends screen
+        break;
+      default:
+        // Handle default case
+        break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,9 +67,7 @@ class THomeCategories extends StatelessWidget {
           return TVerticalImageText(
             image: image,
             title: title,
-            onTap: () {
-              // Add onTap functionality here
-            },
+            onTap: () => navigateToCategory(index),
           );
         },
       ),

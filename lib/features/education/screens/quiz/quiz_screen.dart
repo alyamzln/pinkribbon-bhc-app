@@ -4,7 +4,7 @@ import 'package:pinkribbonbhc/common/widgets/appbar/appbar.dart';
 import 'package:pinkribbonbhc/common/widgets/custom_shapes/containers/primary_header_container.dart';
 import 'package:pinkribbonbhc/common/widgets/custom_shapes/top_bar/top_bar.dart';
 import 'package:pinkribbonbhc/common/widgets/texts/section_heading.dart';
-import 'package:pinkribbonbhc/features/education/controllers/quiz_controller.dart';
+import 'package:pinkribbonbhc/features/education/controllers/quiz/quiz_controller.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
 

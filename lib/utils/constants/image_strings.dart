@@ -16,6 +16,12 @@ class TImages {
   static const String riskIcon = "assets/icons/categories/icon-risk.png";
   static const String trendIcon = "assets/icons/categories/icon-trend.png";
 
+  // Screening Icons
+  static const String cbeIcon = "assets/icons/screening/cbe-icon.png";
+  static const String mammogramIcon =
+      "assets/icons/screening/mammogram-icon.png";
+  static const String mriIcon = "assets/icons/screening/mri-icon.png";
+
   // Bottom Nav Icons
   static const String bseIcon = "assets/icons/nav-bar/three-fingers.png";
   static const String ribbonIcon = "assets/icons/nav-bar/ribbon.png";
@@ -54,6 +60,32 @@ class TImages {
       "assets/images/animations/Animation - 1711508149670.json";
   static const String successAnimation =
       "assets/images/animations/Animation - 1713663309728.json";
+  static const String loadingAnimation =
+      "assets/images/animations/Animation - 1717474447623.json";
+  static const String mapAnimation =
+      "assets/images/animations/mapanimation.json";
+  static const String pinkRibbon =
+      "assets/images/animations/Animation - 1717599692924.json";
+
+  // -- Region Images
+  static const String johor = "assets/images/regions/johor.png";
+  static const String kedah = "assets/images/regions/kedah.png";
+  static const String kelantan = "assets/images/regions/kelantan.png";
+  static const String melaka = "assets/images/regions/melaka.png";
+  static const String negeriSembilan =
+      "assets/images/regions/negerisembilan.png";
+  static const String perlis = "assets/images/regions/perlis.jpg";
+  static const String perak = "assets/images/regions/perak.png";
+  static const String penang = "assets/images/regions/penang.png";
+  static const String sabah = "assets/images/regions/sabah.png";
+  static const String sarawak = "assets/images/regions/sarawak.png";
+  static const String selangor = "assets/images/regions/selangor.png";
+  static const String terengganu = "assets/images/regions/terengganu.png";
+  static const String kualalumpur = "assets/images/regions/kualalumpur.png";
+  static const String putrajaya = "assets/images/regions/putrajaya.png";
+  static const String labuan = "assets/images/regions/labuan.png";
+  static const String pahang = "assets/images/regions/pahang.png";
+  static const String langkawi = "assets/images/regions/langkawi.png";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =

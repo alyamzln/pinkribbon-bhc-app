@@ -1,15 +1,27 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pinkribbonbhc/common/widgets/appbar/appbar.dart';
 import 'package:pinkribbonbhc/common/widgets/custom_shapes/containers/primary_header_container.dart';
+import 'package:pinkribbonbhc/features/risk-assessment/screens/risk_assess_ques.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/image_strings.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
+import 'package:pinkribbonbhc/utils/constants/text_strings.dart';
+import 'package:pinkribbonbhc/utils/popups/loaders.dart';
+import 'package:quickalert/quickalert.dart';
 
 class RiskAssessmentScreen extends StatelessWidget {
   const RiskAssessmentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final User? user = FirebaseAuth.instance.currentUser;
+
+    if (user == null) {
+      TLoaders.errorSnackBar(title: Error!, message: 'No user logged in');
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -65,12 +77,27 @@ class RiskAssessmentScreen extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
+              padding: const EdgeInsets.symmetric(horizontal: 30),
               child: SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    QuickAlert.show(
+                        context: context,
+                        type: QuickAlertType.info,
+                        title: "Important Note!",
+                        text: TTexts.disclaimerRisk,
+                        confirmBtnText: "I Understand",
+                        confirmBtnColor: TColors.primary,
+                        confirmBtnTextStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            color: TColors.white),
+                        onConfirmBtnTap: () {
+                          Navigator.of(context).pop(); // Dismiss the alert
+                          Get.to(() => RiskAssessmentQuestion());
+                        });
+                  },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(

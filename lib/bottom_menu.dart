@@ -67,7 +67,7 @@ class _BottomMenuState extends State<BottomMenu> {
     List<IconData> iconItems = [
       Iconsax.home,
       Iconsax.clipboard_text,
-      Iconsax.book,
+      Iconsax.health,
       Iconsax.user,
     ];
     return AnimatedBottomNavigationBar(
@@ -79,6 +79,7 @@ class _BottomMenuState extends State<BottomMenu> {
       },
       splashColor: TColors.primary,
       inactiveColor: darkMode ? TColors.light : TColors.dark,
+      activeColor: TColors.primary,
       activeIndex: pageIndex,
       notchSmoothness: NotchSmoothness.softEdge,
       leftCornerRadius: 10,

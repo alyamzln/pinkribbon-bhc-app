@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
+import 'package:pinkribbonbhc/data/services/bse_feedback_services.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:pinkribbonbhc/utils/popups/loaders.dart'; // Import Firebase Auth
 
 class FeedbackPage2 extends StatefulWidget {
   const FeedbackPage2({Key? key}) : super(key: key);
@@ -18,6 +21,10 @@ class _FeedbackPage2State extends State<FeedbackPage2> {
   String selectedDuration = '1 day';
   bool isOnPeriod = false;
   DateTime? lastPeriodDate;
+  String? otherChangeType; // Variable to store the other change type input
+
+  final FeedbackService _firestoreService = FeedbackService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -104,6 +111,10 @@ class _FeedbackPage2State extends State<FeedbackPage2> {
                         setState(() {
                           selectedChangeType = newValue!;
                           showOtherChangeTypeField = newValue == 'Other';
+                          if (!showOtherChangeTypeField) {
+                            otherChangeType =
+                                null; // Reset otherChangeType if not 'Other'
+                          }
                         });
                       },
                       items: <String>['Lump', 'Thickening', 'Swelling', 'Other']
@@ -129,11 +140,14 @@ class _FeedbackPage2State extends State<FeedbackPage2> {
                           decoration: const InputDecoration(
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
+                            hintText: 'Specify other change type',
                             hintStyle:
                                 TextStyle(color: Colors.grey, fontSize: 14.0),
                           ),
                           maxLines: 1,
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                            otherChangeType = value;
+                          },
                         ),
                       ),
                     ),
@@ -249,7 +263,28 @@ class _FeedbackPage2State extends State<FeedbackPage2> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 14.0),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  User? user = _auth.currentUser; // Get the current user
+                  if (user != null) {
+                    await _firestoreService.saveFeedback(
+                      userId: user.uid,
+                      location: selectedLocation,
+                      changeType: selectedChangeType == 'Other' &&
+                              otherChangeType != null
+                          ? otherChangeType!
+                          : selectedChangeType,
+                      duration: selectedDuration,
+                      isOnPeriod: isOnPeriod,
+                      lastPeriodDate: lastPeriodDate,
+                    );
+                    TLoaders.successSnackBar(
+                        title: 'Success',
+                        message: 'Feedback saved successfully!');
+                  } else {
+                    TLoaders.errorSnackBar(
+                        title: 'Error', message: 'User not signed in!');
+                  }
+                },
                 child: const Text(
                   'Save',
                   style: TextStyle(fontFamily: 'Poppins'),

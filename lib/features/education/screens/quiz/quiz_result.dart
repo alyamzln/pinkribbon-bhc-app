@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinkribbonbhc/common/widgets/appbar/appbar.dart';
-import 'package:pinkribbonbhc/features/education/controllers/quiz_controller.dart'; // Import the QuizController
+import 'package:pinkribbonbhc/features/education/controllers/quiz/quiz_controller.dart'; // Import the QuizController
 import 'package:pinkribbonbhc/features/education/screens/home/home.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/image_strings.dart';
@@ -19,7 +19,7 @@ class QuizResultScreen extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
-              Get.offAll(() => HomeScreen());
+              Navigator.popUntil(context, (route) => route.isFirst);
             },
           )
         ],
