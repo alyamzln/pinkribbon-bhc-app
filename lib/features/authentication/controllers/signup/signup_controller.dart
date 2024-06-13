@@ -47,16 +47,16 @@ class SignUpController extends GetxController {
       }
 
       // Privacy Policy Check
-      if (!privacyPolicy.value) {
-        // Remove loader
-        TFullScreenLoader.stopLoading();
+      // if (!privacyPolicy.value) {
+      //   // Remove loader
+      //   TFullScreenLoader.stopLoading();
 
-        TLoaders.warningSnackBar(
-            title: 'Accept Privacy Policy',
-            message:
-                'In order to create an account, you must read and accept the Privacy Policy & Terms of Use.');
-        return;
-      }
+      //   TLoaders.warningSnackBar(
+      //       title: 'Accept Privacy Policy',
+      //       message:
+      //           'In order to create an account, you must read and accept the Privacy Policy & Terms of Use.');
+      //   return;
+      // }
 
       // Register user in the Firebase Authentication & save user data
       final userCredential = await AuthenticationRepository.instance

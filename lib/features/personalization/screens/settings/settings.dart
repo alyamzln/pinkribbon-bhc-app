@@ -7,10 +7,13 @@ import 'package:pinkribbonbhc/common/widgets/custom_shapes/containers/primary_he
 import 'package:pinkribbonbhc/common/widgets/list_titles/setttings_menu_tile.dart';
 import 'package:pinkribbonbhc/common/widgets/list_titles/user_profile_tile.dart';
 import 'package:pinkribbonbhc/common/widgets/texts/section_heading.dart';
+import 'package:pinkribbonbhc/data/repositories/authentication/authentication_repository.dart';
 import 'package:pinkribbonbhc/features/personalization/screens/profile/profile.dart';
+import 'package:pinkribbonbhc/features/self-exam/screens/scheduling/schedule_exam.dart';
 import 'package:pinkribbonbhc/utils/constants/colors.dart';
 import 'package:pinkribbonbhc/utils/constants/image_strings.dart';
 import 'package:pinkribbonbhc/utils/constants/sizes.dart';
+import 'package:pinkribbonbhc/features/education/controllers/user/username_controller.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -18,6 +21,7 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final UserNameController userController = Get.put(UserNameController());
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -54,28 +58,18 @@ class SettingsScreen extends StatelessWidget {
                   height: TSizes.spaceBtwItems,
                 ),
                 TSettingsMenuTile(
-                  icon: Iconsax.password_check,
-                  title: 'Change password',
-                  subTitle: 'Change your password',
-                  onTap: () {},
-                ),
-                TSettingsMenuTile(
                   icon: Iconsax.notification,
                   title: 'Notifications',
                   subTitle: 'Set notifications for timely reminder',
-                  onTap: () {},
-                ),
-                TSettingsMenuTile(
-                  icon: Iconsax.share,
-                  title: 'Share',
-                  subTitle: 'Share this app to others',
-                  onTap: () {},
+                  trailing: Switch(value: true, onChanged: (value) {}),
                 ),
                 TSettingsMenuTile(
                   icon: Iconsax.woman,
                   title: 'Next self-check',
                   subTitle: 'View or schedule your next self-check',
-                  onTap: () {},
+                  onTap: () {
+                    Get.to(() => ScheduleExamPage());
+                  },
                 ),
                 TSettingsMenuTile(
                   icon: Iconsax.location,
@@ -90,7 +84,7 @@ class SettingsScreen extends StatelessWidget {
                     width: double.infinity,
                     child: OutlinedButton(
                       onPressed: () {
-                        FirebaseAuth.instance.signOut();
+                        AuthenticationRepository.instance.logout();
                       },
                       child: const Text('Logout'),
                     )),

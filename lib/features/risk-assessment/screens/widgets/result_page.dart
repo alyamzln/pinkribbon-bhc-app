@@ -117,7 +117,7 @@ class _ResultPageState extends State<ResultPage> {
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.popUntil(context, (route) => route.isFirst);
+                        Get.toNamed('/bottomMenu');
                       },
                       style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
@@ -127,7 +127,7 @@ class _ResultPageState extends State<ResultPage> {
                           foregroundColor: TColors.primary,
                           side: BorderSide(color: TColors.primary)),
                       child: Text(
-                        'Back to Assessment Screen',
+                        'Back to Homepage',
                         style: TextStyle(fontFamily: 'Poppins'),
                       ),
                     ),

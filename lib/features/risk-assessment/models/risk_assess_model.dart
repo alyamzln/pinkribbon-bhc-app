@@ -70,12 +70,15 @@ class RiskAssessment {
   String userID;
   double totalScore;
   DateTime assessmentDate;
+  String riskCategory; // Add this field
 
-  RiskAssessment(
-      {required this.id,
-      required this.userID,
-      required this.totalScore,
-      required this.assessmentDate});
+  RiskAssessment({
+    required this.id,
+    required this.userID,
+    required this.totalScore,
+    required this.assessmentDate,
+    required this.riskCategory, // Initialize this field
+  });
 
   factory RiskAssessment.fromMap(Map<String, dynamic> data, String documentId) {
     return RiskAssessment(
@@ -83,6 +86,7 @@ class RiskAssessment {
       userID: data['userID'],
       totalScore: data['totalScore'],
       assessmentDate: (data['assessmentDate'] as Timestamp).toDate(),
+      riskCategory: data['riskCategory'] ?? '', // Fetch this field
     );
   }
 
@@ -91,6 +95,7 @@ class RiskAssessment {
       'userID': userID,
       'totalScore': totalScore,
       'assessmentDate': assessmentDate,
+      'riskCategory': riskCategory, // Include this field
     };
   }
 }

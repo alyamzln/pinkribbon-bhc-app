@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          const TPrimaryHeaderContainer(
+          TPrimaryHeaderContainer(
             child: Column(
               children: [
                 /// -- Appbar --

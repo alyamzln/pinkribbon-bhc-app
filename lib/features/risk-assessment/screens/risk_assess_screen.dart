@@ -19,7 +19,7 @@ class RiskAssessmentScreen extends StatelessWidget {
     final User? user = FirebaseAuth.instance.currentUser;
 
     if (user == null) {
-      TLoaders.errorSnackBar(title: Error!, message: 'No user logged in');
+      TLoaders.errorSnackBar(title: 'Error!', message: 'No user logged in');
     }
 
     return Scaffold(

@@ -11,7 +11,7 @@ class SymptomLogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title:
@@ -20,16 +20,13 @@ class SymptomLogScreen extends StatelessWidget {
         ),
         body: Column(
           children: [
-            TabBar(
+            const TabBar(
               tabs: [
                 Tab(
                   icon: Icon(Iconsax.calendar, color: TColors.primary),
                 ),
                 Tab(
                   icon: Icon(Iconsax.chart_square, color: TColors.primary),
-                ),
-                Tab(
-                  icon: Icon(Iconsax.clock, color: TColors.primary),
                 ),
               ],
             ),
@@ -41,11 +38,6 @@ class SymptomLogScreen extends StatelessWidget {
                 Container(
                   child: Center(
                     child: SymptomDataAnalytics(),
-                  ),
-                ),
-                Container(
-                  child: Center(
-                    child: Text('3RD TAB'),
                   ),
                 ),
               ]),

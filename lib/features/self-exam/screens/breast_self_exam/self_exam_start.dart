@@ -38,10 +38,19 @@ class _SelfExamStartState extends State<SelfExamStart> {
         Map<String, dynamic> scheduleExamData =
             doc.data() as Map<String, dynamic>;
         if (scheduleExamData.containsKey('userModifiedDate')) {
-          setState(() {
-            _userModifiedDate =
-                (scheduleExamData['userModifiedDate'] as Timestamp).toDate();
-          });
+          var userModifiedDate = scheduleExamData['userModifiedDate'];
+          DateTime? parsedDate;
+          if (userModifiedDate is Timestamp) {
+            parsedDate = userModifiedDate.toDate();
+          } else if (userModifiedDate is String) {
+            parsedDate = DateTime.tryParse(userModifiedDate);
+          }
+
+          if (parsedDate != null) {
+            setState(() {
+              _userModifiedDate = parsedDate;
+            });
+          }
         }
       }
     }
@@ -70,30 +79,34 @@ class _SelfExamStartState extends State<SelfExamStart> {
                 ],
               ),
             ),
+            if (_userModifiedDate != null)
+              Padding(
+                padding: EdgeInsets.all(TSizes.defaultSpace),
+                child: Card(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.info_outline),
+                        Expanded(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: Text(
+                                'Your next self-check is scheduled for ${DateFormat('MMMM d, y - h:mm a').format(_userModifiedDate!)}',
+                                style: TextStyle(fontFamily: 'Poppins')),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: TSizes.defaultSpace),
               child: Column(
                 children: [
-                  if (_userModifiedDate != null)
-                    Card(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Icon(Icons.info_outline),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: Text(
-                                    'Your next self-check is scheduled for ${DateFormat('MMMM d, y - h:mm a').format(_userModifiedDate!)}',
-                                    style: TextStyle(fontFamily: 'Poppins')),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                   SizedBox(
                     width: double.infinity,
                     height: 320,

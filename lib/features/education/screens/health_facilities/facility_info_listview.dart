@@ -104,17 +104,6 @@ class _FacilityInfoListViewState extends State<FacilityInfoListView> {
                           icon: Icon(Icons.phone),
                           onPressed: () => _callNumber(facility.contactNum),
                         ),
-                        IconButton(
-                          icon: Icon(Icons.web),
-                          onPressed: () async {
-                            if (await canLaunchUrl(
-                                Uri.parse(facility.website))) {
-                              await launchUrl(Uri.parse(facility.website));
-                            } else {
-                              throw 'Could not launch ${facility.website}';
-                            }
-                          },
-                        ),
                       ],
                     ),
                     onTap: () {

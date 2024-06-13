@@ -6,7 +6,7 @@ class RiskAssessmentRepository {
 
   Future<RiskAssessment?> fetchRiskAssessment(String userID) async {
     QuerySnapshot querySnapshot = await _firestore
-        .collection('RiskAssessment')
+        .collection('RiskAssessments')
         .where('userID', isEqualTo: userID)
         .get();
 
@@ -23,7 +23,7 @@ class RiskAssessmentRepository {
 
     if (existingAssessment != null) {
       await _firestore
-          .collection('RiskAssessment')
+          .collection('RiskAssessments')
           .doc(existingAssessment.id)
           .update({
         'totalScore': totalScore,
@@ -32,12 +32,25 @@ class RiskAssessmentRepository {
       return existingAssessment.id;
     } else {
       DocumentReference docRef =
-          await _firestore.collection('RiskAssessment').add({
+          await _firestore.collection('RiskAssessments').add({
         'userID': userID,
         'totalScore': totalScore,
         'assessmentDate': FieldValue.serverTimestamp(),
+        'riskCategory':
+            calculateRiskCategory(totalScore), // Ensure this field is set
       });
       return docRef.id;
+    }
+  }
+
+  String calculateRiskCategory(double totalScore) {
+    // Implement your logic to calculate risk category based on total score
+    if (totalScore > 50) {
+      return 'High';
+    } else if (totalScore > 20) {
+      return 'Medium';
+    } else {
+      return 'Low';
     }
   }
 

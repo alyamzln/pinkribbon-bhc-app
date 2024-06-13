@@ -54,7 +54,7 @@ class QuizResultScreen extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                             Text(
-                              "Congrats!",
+                              "Well Done!",
                               style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
